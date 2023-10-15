@@ -1,24 +1,29 @@
 import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Navbar from './components/Navbar.js';
+import Home from './components/Home.js'
+import Order from './components/Order.js'
+import Contact from './components/Contact.js'
+import NotFound from './components/NotFound.js';
+import Services from './components/Services.js'
+import { AddressProvider } from './components/AddressProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AddressProvider>
+      <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/order" element={<Order />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/services" element={<Services />} />
+            {/* Catch-All Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+      </Router>
+    </AddressProvider>
   );
 }
 
